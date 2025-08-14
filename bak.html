@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+
+    <title>Sidebar left menu - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style type="text/css">
+        body {
+            background: #f5f5f5;
+        }
+
+        .ui-w-80 {
+            width: 80px !important;
+            height: auto;
+        }
+
+        .text-light {
+            color: #babbbc !important;
+        }
+
+        .btn-facebook {
+            border-color: rgba(0, 0, 0, 0);
+            background: #3B5998;
+            color: #fff;
+        }
+
+        .btn-instagram {
+            border-color: rgba(0, 0, 0, 0);
+            background: #000;
+            color: #fff;
+        }
+
+        .card {
+            background-clip: padding-box;
+            box-shadow: 0 1px 4px rgba(24, 28, 33, 0.012);
+        }
+
+        .row-bordered {
+            overflow: hidden;
+        }
+
+        .account-settings-fileinput {
+            position: absolute;
+            visibility: hidden;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+        }
+
+        .account-settings-links .list-group-item.active {
+            font-weight: bold !important;
+        }
+
+        html:not(.dark-style) .account-settings-links .list-group-item.active {
+            background: rgba(11, 200, 46, 0.81) !important;
+        }
+
+        .account-settings-multiselect~.select2-container {
+            width: 100% !important;
+        }
+
+        .light-style .account-settings-links .list-group-item {
+            padding: 0.85rem 1.5rem;
+            border-color: rgba(24, 28, 33, 0.03) !important;
+        }
+
+        .light-style .account-settings-links .list-group-item.active {
+            color: #4e5155 !important;
+        }
+
+        .material-style .account-settings-links .list-group-item {
+            padding: 0.85rem 1.5rem;
+            border-color: rgba(24, 28, 33, 0.03) !important;
+        }
+
+        .material-style .account-settings-links .list-group-item.active {
+            color: #4e5155 !important;
+        }
+
+        .dark-style .account-settings-links .list-group-item {
+            padding: 0.85rem 1.5rem;
+            border-color: rgba(255, 255, 255, 0.03) !important;
+        }
+
+        .dark-style .account-settings-links .list-group-item.active {
+            color: #89e0f4 !important;
+        }
+
+        .light-style .account-settings-links .list-group-item.active {
+            color: #4E5155 !important;
+        }
+
+        .light-style .account-settings-links .list-group-item {
+            padding: 0.85rem 1.5rem;
+            border-color: rgba(24, 28, 33, 0.03) !important;
+        }
+
+
+        #wrapper {
+            padding-left: 0;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        #wrapper.toggled {
+            padding-left: 170px;
+        }
+
+        #sidebar-wrapper {
+            z-index: 1000;
+            position: fixed;
+            left: 250px;
+            width: 0;
+            height: 100%;
+            margin-left: -250px;
+            overflow-y: auto;
+            background: #fff;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        #sidebar-wrapper {
+            box-shadow: inset -1px 0px 0px 0px #DDDDDD;
+        }
+
+        #wrapper.toggled #sidebar-wrapper {
+            width: 180px;
+        }
+
+        #page-content-wrapper {
+            width: 100%;
+            position: absolute;
+            padding: 15px;
+        }
+
+        #wrapper.toggled #page-content-wrapper {
+            position: absolute;
+            margin-right: -250px;
+        }
+
+        /* Sidebar Styles */
+
+        .sidebar-nav {
+            position: absolute;
+            top: 0;
+            width: 250px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            text-indent: 20px;
+            line-height: 40px;
+        }
+
+        .sidebar-nav li a {
+            display: block;
+            text-decoration: none;
+            color: #999999;
+        }
+
+        .sidebar-nav li a:hover {
+            text-decoration: none;
+        }
+
+        .sidebar-nav li a:active,
+        .sidebar-nav li a:focus {
+            text-decoration: none;
+        }
+
+        .sidebar-nav>.sidebar-brand {
+            height: 65px;
+            font-size: 18px;
+            line-height: 60px;
+        }
+
+        .sidebar-nav>.sidebar-brand a {
+            color: #999999;
+        }
+
+        .sidebar-nav>.sidebar-brand a:hover {
+            color: #fff;
+            background: none;
+        }
+
+        @media(min-width:768px) {
+            #wrapper {
+                padding-left: 160px;
+            }
+
+            #wrapper.toggled {
+                padding-left: 0;
+            }
+
+            #sidebar-wrapper {
+                width: 175px;
+            }
+
+            #wrapper.toggled #sidebar-wrapper {
+                width: 0;
+            }
+
+            #page-content-wrapper {
+                padding: 20px;
+                position: relative;
+            }
+
+            #wrapper.toggled #page-content-wrapper {
+                position: relative;
+                margin-right: 0;
+            }
+        }
+
+        #sidebar-wrapper li.active>a:after {
+            border-right: 17px solid #f4f3ef;
+            border-top: 17px solid transparent;
+            border-bottom: 17px solid transparent;
+            content: "";
+            display: inline-block;
+            position: absolute;
+            right: -1px;
+        }
+
+        .sidebar-brand {
+            border-bottom: 1px solid rgba(102, 97, 91, 0.3);
+        }
+
+        .sidebar-brand {
+            padding: 18px 0px;
+            margin: 0 20px;
+        }
+
+        .navbar .navbar-nav>li>a p {
+            display: inline-block;
+            margin: 0;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.4em;
+        }
+
+        .navbar-default {
+            background-color: #f4f3ef;
+            border: 0px;
+            border-bottom: 1px solid #DDDDDD;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="wrapper" class="wrapper-content">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="">
+                    <a href="#">
+                        Settings
+                    </a>
+                </li>
+                <div class="list-group list-group-flush account-settings-links">
+                    <a class="list-group-item list-group-item-action active" data-toggle="list"
+                        href="#account-general"><i class="bi bi-cpu"></i> Device</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list"
+                        href="#account-change-password"><i class="bi bi-ui-radios-grid"></i> Config</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info"><i
+                            class="bi bi-info-circle"></i> Info</a>
+                </div>
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button class="btn-menu btn btn-success btn-toggle-menu" type="button">
+                            <i class="bi bi-list"></i>
+                        </button>
+                    </div>
+                    <div class="">
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li>
+                                <p>
+                                    %_DeviceName%
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade active show" id="account-general">
+                        <div class="card-body media align-items-center">
+                            <img src="https://play-lh.googleusercontent.com/DfEB91KZs7JrOIIufWJHJvZJx7bccODKCDjFD1FH4uS7jPZ2sLl-y-3K27u-GMjydg"
+                                alt class="d-block ui-w-80">
+                            <div class="media-body ml-4">
+                                <div class="small mt-1"><strong>Device : </strong>%_DeviceName%</div>
+                                <div class="small mt-1"><strong>ID : </strong>%_DeviceUniqueId%</div>
+                                <div class="small mt-1"><strong>Firmware Version : </strong>%_DeviceFirmwareVersion%
+                                </div>
+                                <div class="small mt-1"><strong>Manufacturer : </strong>%_DeviceManufacturer%</div>
+                                <div class="small mt-1"><strong>Hardware : </strong>%_DeviceHardware%</div>
+                            </div>
+                        </div>
+                        <hr class="border-light m-0">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <h6 class="mb-2 text-danger" style="font-weight: bolder;font-size: 20px;" id="errors"></h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row gutters">
+                                <form class="row g-3" action="/wifiDetails" method="POST">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <h6 class="mb-2 text-primary">WiFi</h6>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
+                                            <label for="ssid">SSID</label>
+                                            <input type="text" class="form-control" id="ssid" placeholder="Enter SSID">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
+                                            <label for="password">PASSWORD</label>
+                                            <input type="password" class="form-control" id="password"
+                                                placeholder="Enter password">
+                                        </div>
+                                    </div>
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="text-right">
+                                                <button type="submit" id="submit" name="submit" class="btn btn-primary">Update
+                                                    Wifi</button>
+                                            </div>
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Username</label>
+                                <input type="text" class="form-control mb-1" value="nmaxwell">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Name</label>
+                                <input type="text" class="form-control" value="Nelle Maxwell">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">E-mail</label>
+                                <input type="text" class="form-control mb-1" value="nmaxwell@mail.com">
+                                <div class="alert alert-warning mt-3">
+                                    Your email is not confirmed. Please check your inbox.<br>
+                                    <a href="javascript:void(0)">Resend confirmation</a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Company</label>
+                                <input type="text" class="form-control" value="Company Ltd.">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="account-change-password">
+                        <div class="card-body pb-2">
+                            <div class="form-group">
+                                <label class="form-label">Current password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">New password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Repeat new password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="account-info">
+                        <div class="card-body pb-2">
+                            <div class="form-group">
+                                <label class="form-label">Bio</label>
+                                <textarea class="form-control"
+                                    rows="5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc arcu, dignissim sit amet sollicitudin iaculis, vehicula id urna. Sed luctus urna nunc. Donec fermentum, magna sit amet rutrum pretium, turpis dolor molestie diam, ut lacinia diam risus eleifend sapien. Curabitur ac nibh nulla. Maecenas nec augue placerat, viverra tellus non, pulvinar risus.</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Birthday</label>
+                                <input type="text" class="form-control" value="May 3, 1995">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Country</label>
+                                <select class="custom-select">
+                                    <option>USA</option>
+                                    <option selected>Canada</option>
+                                    <option>UK</option>
+                                    <option>Germany</option>
+                                    <option>France</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="border-light m-0">
+                        <div class="card-body pb-2">
+                            <h6 class="mb-4">Contacts</h6>
+                            <div class="form-group">
+                                <label class="form-label">Phone</label>
+                                <input type="text" class="form-control" value="+0 (123) 456 7891">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Website</label>
+                                <input type="text" class="form-control" value>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="account-social-links">
+                        <div class="card-body pb-2">
+                            <div class="form-group">
+                                <label class="form-label">Twitter</label>
+                                <input type="text" class="form-control" value="https://twitter.com/user">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Facebook</label>
+                                <input type="text" class="form-control" value="https://www.facebook.com/user">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Google+</label>
+                                <input type="text" class="form-control" value>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">LinkedIn</label>
+                                <input type="text" class="form-control" value>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Instagram</label>
+                                <input type="text" class="form-control" value="https://www.instagram.com/user">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="account-connections">
+                        <div class="card-body">
+                            <button type="button" class="btn btn-twitter">Connect to
+                                <strong>Twitter</strong></button>
+                        </div>
+                        <hr class="border-light m-0">
+                        <div class="card-body">
+                            <h5 class="mb-2">
+                                <a href="javascript:void(0)" class="float-right text-muted text-tiny"><i
+                                        class="ion ion-md-close"></i> Remove</a>
+                                <i class="ion ion-logo-google text-google"></i>
+                                You are connected to Google:
+                            </h5>
+                            <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                data-cfemail="f6989b978e81939a9ab69b979f9ad895999b">[email&#160;protected]</a>
+                        </div>
+                        <hr class="border-light m-0">
+                        <div class="card-body">
+                            <button type="button" class="btn btn-facebook">Connect to
+                                <strong>Facebook</strong></button>
+                        </div>
+                        <hr class="border-light m-0">
+                        <div class="card-body">
+                            <button type="button" class="btn btn-instagram">Connect to
+                                <strong>Instagram</strong></button>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="account-notifications">
+                        <div class="card-body pb-2">
+                            <h6 class="mb-4">Activity</h6>
+                            <div class="form-group">
+                                <label class="switcher">
+                                    <input type="checkbox" class="switcher-input" checked>
+                                    <span class="switcher-indicator">
+                                        <span class="switcher-yes"></span>
+                                        <span class="switcher-no"></span>
+                                    </span>
+                                    <span class="switcher-label">Email me when someone comments on my article</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="switcher">
+                                    <input type="checkbox" class="switcher-input" checked>
+                                    <span class="switcher-indicator">
+                                        <span class="switcher-yes"></span>
+                                        <span class="switcher-no"></span>
+                                    </span>
+                                    <span class="switcher-label">Email me when someone answers on my forum
+                                        thread</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="switcher">
+                                    <input type="checkbox" class="switcher-input">
+                                    <span class="switcher-indicator">
+                                        <span class="switcher-yes"></span>
+                                        <span class="switcher-no"></span>
+                                    </span>
+                                    <span class="switcher-label">Email me when someone follows me</span>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="border-light m-0">
+                        <div class="card-body pb-2">
+                            <h6 class="mb-4">Application</h6>
+                            <div class="form-group">
+                                <label class="switcher">
+                                    <input type="checkbox" class="switcher-input" checked>
+                                    <span class="switcher-indicator">
+                                        <span class="switcher-yes"></span>
+                                        <span class="switcher-no"></span>
+                                    </span>
+                                    <span class="switcher-label">News and announcements</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="switcher">
+                                    <input type="checkbox" class="switcher-input">
+                                    <span class="switcher-indicator">
+                                        <span class="switcher-yes"></span>
+                                        <span class="switcher-no"></span>
+                                    </span>
+                                    <span class="switcher-label">Weekly product updates</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="switcher">
+                                    <input type="checkbox" class="switcher-input" checked>
+                                    <span class="switcher-indicator">
+                                        <span class="switcher-yes"></span>
+                                        <span class="switcher-no"></span>
+                                    </span>
+                                    <span class="switcher-label">Weekly blog digest</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+
+
+
+
+        $(function () {
+            $(".btn-toggle-menu").click(function () {
+                $("#wrapper").toggleClass("toggled");
+            });
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{
+    "wifi_ssid":"Arun_IoT_2.4G",
+    "wifi_password":"arun2k24",
+    
+    "mqttHost":"192.168.0.111",
+    "mqttPort":"1883",
+    "mqttUsername":"iotlogin",
+    "mqttPassword":"arun2k21",
+
+    "DeviceName":"Waranda_SwitchBoard_1",
+    "DeviceUniqueId":"waranda_esp8266_1",
+    "DeviceModel":"ESP-01",
+    "DeviceFirmwareVersion":"1.7.4",
+    "DeviceManufacturer":"Arun R S",
+    "DeviceHardware":"ESP-01 ESP8266EX"
+}
