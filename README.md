@@ -234,7 +234,16 @@ retain: true
 
 Access at `http://[DEVICE_IP]/`
 
-![Interface Preview](https://via.placeholder.com/400x300?text=Web+Dashboard+Preview)
+Home Page
+![Interface Preview 1](webInterface1.png)
+![Interface Preview 1_2](webInterface1_2.png)
+
+Config Page
+![Interface Preview 2](webInterface2.png)
+
+Switches Page
+![Interface Preview 3](webInterface3.png)
+
 
   
 
