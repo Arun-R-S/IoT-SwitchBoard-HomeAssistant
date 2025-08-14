@@ -234,14 +234,14 @@ retain: true
 
 Access at `http://[DEVICE_IP]/`
 
-Home Page
+**Home Page**
 ![Interface Preview 1](webInterface1.png)
 ![Interface Preview 1_2](webInterface1_2.png)
 
-Config Page
+**Config Page**
 ![Interface Preview 2](webInterface2.png)
 
-Switches Page
+**Switches Page**
 ![Interface Preview 3](webInterface3.png)
 
 
